@@ -1,0 +1,31 @@
+{
+  "name": "markgen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dylan Claywell <djclaywell@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/markgen.js",
+    "dev": "webpack --mode development && yarn start",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "html-loader": "^4.2.0",
+    "prettier": "^3.1.1",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "marked": "^11.1.0"
+  }
+}
