@@ -125,7 +125,7 @@ img {
 
 .navigation {
   padding: 0.5rem;
-  flex-basis: 40%;
+  flex-basis: 30%;
   flex-grow: 1;
   border-right: 1px solid #eee;
   height: 100vh;

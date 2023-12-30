@@ -5,9 +5,9 @@
   "author": "Dylan Claywell <djclaywell@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --mode development && node dist/markgen.js",
+    "start": "webpack --mode development && node dist/markgen.js --in docs --out www",
     "dev": "nodemon",
-    "build": "tsc",
+    "build": "webpack --mode production",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ."
   },
@@ -27,6 +27,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "commander": "^11.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "marked": "^11.1.0",
     "uuid": "^9.0.1"

@@ -1,6 +1,7 @@
 import marked from 'marked'
 import * as path from 'path'
 import * as fs from 'fs'
+import { program } from 'commander'
 
 import { generateNavigation } from './navigation'
 import { PageMap, ValueOf, isPageMap } from './types'
@@ -9,6 +10,13 @@ import indexTemplate from './templates/index.html'
 import { generateSidebar } from './sidebar'
 
 const isDev = process.env.NODE_ENV === 'development'
+
+program
+  .option('-i, --in <path>', 'Input directory', 'docs')
+  .option('-o, --out <path>', 'Output directory', 'www')
+  .parse()
+
+const options = program.opts()
 
 function customHeadingId(url: string) {
   return {
@@ -40,10 +48,10 @@ function createFiles(pageMap: PageMap, globalPageMap: PageMap) {
       }),
       sidebar: generateSidebar(page.headings, page.url),
       main: page.contents,
-      base: isDev ? path.resolve(__dirname, 'www') : '/',
+      base: isDev ? path.resolve(__dirname, options.out) : '/',
     })
 
-    const filePath = path.join(__dirname, 'www', page.url)
+    const filePath = path.join(__dirname, options.out, page.url)
 
     if (!fs.existsSync(path.dirname(filePath))) {
       fs.mkdirSync(path.dirname(filePath), { recursive: true })
@@ -104,7 +112,7 @@ const pageMap: PageMap = {}
 
 async function parse(docs: string[]) {
   for (const doc of docs) {
-    const filePath = path.join(__dirname, 'docs', doc)
+    const filePath = path.join(__dirname, options.in, doc)
 
     // check if is directory
     if (fs.lstatSync(filePath).isDirectory()) {
@@ -148,7 +156,7 @@ async function parse(docs: string[]) {
   createFiles(pageMap, JSON.parse(JSON.stringify(pageMap)))
 }
 
-// recursively copy files from assets to www
+// recursively copy files from assets to output directory
 function copyAssets(dir: string, isUserAsset = false) {
   const files = fs.readdirSync(dir)
 
@@ -163,11 +171,15 @@ function copyAssets(dir: string, isUserAsset = false) {
       continue
     }
 
-    const dest = path.join(
-      __dirname,
-      'www',
-      filePath.replace(`${__dirname}${isUserAsset ? '/docs' : ''}`, ''),
-    )
+    // get index of the last directory called assets
+    const index = filePath.lastIndexOf('assets')
+
+    // get the path after the assets directory
+    const assetPath = filePath.slice(index)
+
+    const dest = path.join(__dirname, options.out, assetPath)
+
+    console.log(filePath, dest, options.in)
 
     if (!fs.existsSync(path.dirname(dest))) {
       fs.mkdirSync(path.dirname(dest), { recursive: true })
@@ -178,8 +190,8 @@ function copyAssets(dir: string, isUserAsset = false) {
 }
 
 copyAssets(path.join(__dirname, 'assets'))
-copyAssets(path.join(__dirname, 'docs', 'assets'), true)
+copyAssets(path.join(__dirname, options.in, 'assets'), true)
 
-const docs = fs.readdirSync(path.join(__dirname, 'docs'))
+const docs = fs.readdirSync(path.join(__dirname, options.in))
 
 parse(docs)
