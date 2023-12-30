@@ -1,7 +1,9 @@
 import { v4 as generateUuid } from 'uuid'
 
-import { replaceTemplateSlot } from './template'
+import { replaceTemplateSlot, replaceTemplateSlots } from './template'
 import navigationTemplate from './templates/navigation.html'
+import navigationAccordionTemplate from './templates/navigationAccordion.html'
+import navigationLinkTemplate from './templates/navigationLink.html'
 import { PageMap, isPageMap } from './types'
 import { capitalizeString } from './utils'
 
@@ -21,24 +23,22 @@ function createList(pageMap: PageMap, url: string): string[] {
     const contentId = generateUuid()
 
     return isPageMap(page)
-      ? `
-        <button data-content-id="${contentId}" class='category-button ${
-          checkIfShouldBeOpen(pageMap, url) ? 'open' : ''
-        }'>
-          <span>${capitalizeString(key)}</span> 
-          <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36">
-            <path stroke="currentColor" fill="currentColor" d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
-          </svg>
-        </button>
-        <ul class="category-list ${
-          checkIfShouldBeOpen(pageMap, url) ? '' : 'hidden'
-        }" id=${contentId}>
-        ${createList(page, url)}
-        </ul>
-      `
-      : `<li><a ${page.url === url ? 'class="active"' : ''} href="${
-          page.url
-        }">${page.title}</a></li>`
+      ? replaceTemplateSlots(navigationAccordionTemplate, {
+          'content-id': contentId,
+          'category-button-class': checkIfShouldBeOpen(pageMap, url)
+            ? 'open'
+            : '',
+          category: capitalizeString(key),
+          'category-list-class': checkIfShouldBeOpen(pageMap, url)
+            ? ''
+            : 'hidden',
+          'category-list': createList(page, url).join('\n'),
+        })
+      : replaceTemplateSlots(navigationLinkTemplate, {
+          url: page.url,
+          title: page.title,
+          class: page.url === url ? 'active' : '',
+        })
   })
 }
 

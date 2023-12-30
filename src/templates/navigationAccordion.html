@@ -1,0 +1,24 @@
+<button
+  data-content-id='<TEMPLATE_SLOT name="content-id" />'
+  class='category-button <TEMPLATE_SLOT name="category-button-class" />'
+>
+  <span><TEMPLATE_SLOT name="category" /></span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24"
+    viewBox="0 -960 960 960"
+    width="24"
+  >
+    <path
+      stroke="currentColor"
+      fill="currentColor"
+      d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"
+    />
+  </svg>
+</button>
+<ul
+  class='category-list <TEMPLATE_SLOT name="category-list-class" />'
+  id='<TEMPLATE_SLOT name="content-id" />'
+>
+  <TEMPLATE_SLOT name="category-list" />
+</ul>

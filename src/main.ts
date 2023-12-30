@@ -149,10 +149,12 @@ async function parse(docs: string[]) {
 }
 
 // recursively copy files from assets to www
-function copyAssets(dir: string) {
+function copyAssets(dir: string, isUserAsset = false) {
   const files = fs.readdirSync(dir)
 
   for (const file of files) {
+    if (file === '.DS_Store') continue
+
     const filePath = path.join(dir, file)
     const stats = fs.statSync(filePath)
 
@@ -161,7 +163,11 @@ function copyAssets(dir: string) {
       continue
     }
 
-    const dest = path.join(__dirname, 'www', filePath.replace(__dirname, ''))
+    const dest = path.join(
+      __dirname,
+      'www',
+      filePath.replace(`${__dirname}${isUserAsset ? '/docs' : ''}`, ''),
+    )
 
     if (!fs.existsSync(path.dirname(dest))) {
       fs.mkdirSync(path.dirname(dest), { recursive: true })
@@ -172,6 +178,7 @@ function copyAssets(dir: string) {
 }
 
 copyAssets(path.join(__dirname, 'assets'))
+copyAssets(path.join(__dirname, 'docs', 'assets'), true)
 
 const docs = fs.readdirSync(path.join(__dirname, 'docs'))
 
