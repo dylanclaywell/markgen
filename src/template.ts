@@ -1,5 +1,5 @@
 export function replaceTemplateSlot(template: string, value: string) {
-  return template.replace(/.*<TEMPLATE_SLOT \/>.*/, value)
+  return template.replace(/<TEMPLATE_SLOT \/>/, value)
 }
 
 export function replaceTemplateSlots(

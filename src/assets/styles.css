@@ -1,0 +1,209 @@
+:root {
+  --color-primary-10: #36d236;
+  --color-primary-20: #1eae1a;
+  --color-primary-30: #139117;
+  --color-primary-40: #0c5f0b;
+  --color-primary-50: #054004;
+
+  --color-gray-0: #ffffff;
+  --color-gray-5: #f5f5f5;
+  --color-gray-10: #d4d4d4;
+  --color-gray-20: #ababab;
+  --color-gray-30: #838383;
+  --color-gray-40: #5e5e5e;
+  --color-gray-50: #3b3b3b;
+  --color-gray-60: #303030;
+  --color-gray-70: #262626;
+  --color-gray-80: #1b1b1b;
+  --color-gray-90: #111111;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+body {
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 3rem;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  text-decoration: none;
+  color: var(--color-gray-50);
+  font-weight: normal;
+  transition: 150ms all;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: var(--color-primary-30);
+}
+
+.navigation {
+  padding: 0.5rem;
+  flex-basis: 40%;
+  flex-grow: 1;
+  border-right: 1px solid #eee;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.navigation > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navigation li {
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+}
+
+.navigation li a {
+  width: 100%;
+  padding: 0.75rem;
+  text-decoration: none;
+  color: var(--color-gray-40);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navigation li a.active {
+  color: var(--color-primary-30);
+}
+
+.navigation li a:hover {
+  color: var(--color-gray-90);
+}
+
+.navigation li a.active:hover {
+  color: var(--color-primary-40);
+}
+
+.main {
+  flex-basis: 80%;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: calc(100vh - 2rem);
+  padding: 1rem;
+  background: var(--color-gray-5);
+  color: var(--color-gray-40);
+}
+
+.page-content {
+  padding: 3rem 6rem;
+}
+
+.category-button {
+  all: unset;
+  font-weight: bold;
+  padding: 0.75rem;
+  cursor: pointer;
+  color: var(--color-gray-40);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 1.25rem;
+}
+
+.category-button:hover {
+  color: var(--color-gray-90);
+}
+
+.category-button svg {
+  pointer-events: none;
+  transition: 150ms all;
+}
+
+.category-button span {
+  pointer-events: none;
+}
+
+.category-button.open svg {
+  transform: rotate(90deg);
+}
+
+.category-list {
+  transition: 300ms all;
+  overflow: hidden;
+  padding-left: 1rem;
+}
+
+.category-list.hidden {
+  height: 0;
+}
+
+.sidebar {
+  flex-basis: 20%;
+  border-left: 1px solid #eee;
+  padding: 1rem;
+}
+
+.sidebar ul {
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 0.5rem 0;
+}
+
+.sidebar a {
+  color: var(--color-gray-40);
+  text-decoration: none;
+  transition: 150ms all;
+}
+
+.sidebar a:hover {
+  color: var(--color-gray-90);
+}

@@ -3,9 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title><TEMPLATE_SLOT name="title" /></title>
+    <base href='<TEMPLATE_SLOT name="base" />/' />
+    <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
+    <script src="assets/javascript/accordion.js"></script>
     <TEMPLATE_SLOT name="navigation" />
-    <main><TEMPLATE_SLOT name="main" /></main>
+    <main class="main">
+      <div class="page-content"><TEMPLATE_SLOT name="main" /></div>
+    </main>
+    <TEMPLATE_SLOT name="sidebar" />
   </body>
 </html>

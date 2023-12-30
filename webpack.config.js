@@ -4,22 +4,23 @@ const path = require('path')
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development'
 
-  const plugins = isDev
-    ? [
-        new CopyPlugin({
-          patterns: [
-            {
-              from: path.resolve(__dirname, 'src', 'docs'),
-              to: path.resolve(__dirname, 'dist', 'docs'),
-            },
-            {
-              from: path.resolve(__dirname, 'src', 'www'),
-              to: path.resolve(__dirname, 'dist', 'www'),
-            },
-          ],
-        }),
-      ]
-    : []
+  const copyPluginPatterns = [
+    {
+      from: path.resolve(__dirname, 'src', 'assets'),
+      to: path.resolve(__dirname, 'dist', 'assets'),
+    },
+  ]
+
+  if (isDev) {
+    copyPluginPatterns.push(
+      ...[
+        {
+          from: path.resolve(__dirname, 'src', 'docs'),
+          to: path.resolve(__dirname, 'dist', 'docs'),
+        },
+      ],
+    )
+  }
 
   return {
     entry: './src/main.ts',
@@ -34,6 +35,9 @@ module.exports = (env, argv) => {
         {
           test: /\.html$/i,
           loader: 'html-loader',
+          options: {
+            sources: false,
+          },
         },
       ],
     },
@@ -43,7 +47,12 @@ module.exports = (env, argv) => {
     output: {
       filename: 'markgen.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
-    plugins,
+    plugins: [
+      new CopyPlugin({
+        patterns: copyPluginPatterns,
+      }),
+    ],
   }
 }
