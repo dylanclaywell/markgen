@@ -1,22 +1,4 @@
-:root {
-  --color-primary-10: #36d236;
-  --color-primary-20: #1eae1a;
-  --color-primary-30: #139117;
-  --color-primary-40: #0c5f0b;
-  --color-primary-50: #054004;
-
-  --color-gray-0: #ffffff;
-  --color-gray-5: #f5f5f5;
-  --color-gray-10: #d4d4d4;
-  --color-gray-20: #ababab;
-  --color-gray-30: #838383;
-  --color-gray-40: #5e5e5e;
-  --color-gray-50: #3b3b3b;
-  --color-gray-60: #303030;
-  --color-gray-70: #262626;
-  --color-gray-80: #1b1b1b;
-  --color-gray-90: #111111;
-}
+@import 'colors.css';
 
 @font-face {
   font-family: 'Roboto Mono';
@@ -121,14 +103,21 @@ h6 a:hover {
 img {
   max-width: 100%;
   margin: 2rem 0;
+  filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+}
+
+p,
+li {
+  line-height: 2rem;
 }
 
 .navigation {
   padding: 0.5rem;
-  flex-basis: 30%;
+  flex-basis: 20%;
   flex-grow: 1;
   border-right: 1px solid #eee;
-  height: 100vh;
+  height: calc(100vh - 1rem);
   overflow-y: auto;
 }
 
@@ -140,11 +129,12 @@ img {
 .navigation li {
   cursor: pointer;
   display: flex;
+  padding: 0.75rem 0;
 }
 
 .navigation li a {
   width: 100%;
-  padding: 0.75rem;
+  padding-left: 0.75rem;
   text-decoration: none;
   color: var(--color-gray-40);
   font-weight: bold;
@@ -153,6 +143,7 @@ img {
 }
 
 .navigation li a.active {
+  border-left: 0.25rem solid var(--color-primary-30);
   color: var(--color-primary-30);
 }
 
@@ -168,10 +159,9 @@ img {
   flex-basis: 80%;
   flex-grow: 1;
   overflow-y: auto;
-  height: calc(100vh - 2rem);
-  padding: 1rem;
-  background: var(--color-gray-5);
+  height: 100vh;
   color: var(--color-gray-40);
+  display: flex;
 }
 
 .page-content {
@@ -220,26 +210,62 @@ img {
 }
 
 .sidebar {
-  flex-basis: 20%;
-  border-left: 1px solid #eee;
+  width: 50%;
   padding: 1rem;
+  position: sticky;
+  top: 6rem;
+  height: calc(100vh - 8rem);
+  color: var(--color-gray-30);
 }
 
 .sidebar ul {
   padding: 0;
-  list-style: none;
-}
-
-.sidebar li {
-  padding: 0.5rem 0;
 }
 
 .sidebar a {
-  color: var(--color-gray-40);
   text-decoration: none;
   transition: 150ms all;
+  font-size: 0.75rem;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--color-gray-30);
 }
 
 .sidebar a:hover {
   color: var(--color-gray-90);
+}
+
+.sidebar li.active::marker {
+  color: var(--color-secondary-30);
+}
+
+.sidebar li.active:hover::marker {
+  color: var(--color-secondary-40);
+}
+
+.sidebar li.indent-2 {
+  margin-left: 1rem;
+}
+
+.sidebar li.indent-3 {
+  margin-left: 2rem;
+}
+
+.sidebar li.indent-4 {
+  margin-left: 3rem;
+}
+
+.sidebar li.indent-5 {
+  margin-left: 4rem;
+}
+
+.sidebar li.indent-6 {
+  margin-left: 5rem;
+}
+
+.sidebar li a.active {
+  color: var(--color-secondary-30);
+}
+
+.sidebar li a.active:hover {
+  color: var(--color-secondary-40);
 }

@@ -1,22 +1,20 @@
 import marked from 'marked'
 import * as path from 'path'
 import * as fs from 'fs'
-import { program } from 'commander'
 
 import { generateNavigation } from './navigation'
-import { PageMap, ValueOf, isPageMap } from './types'
+import { Heading, PageMap, ValueOf, isPageMap } from './types'
 import { replaceTemplateSlots } from './template'
 import indexTemplate from './templates/index.html'
 import { generateSidebar } from './sidebar'
+import { generateCssVariables } from './cssVariables'
+import { getCliOptions, initializeCliOptions } from './cli'
+import { initializeConfig } from './config'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-program
-  .option('-i, --in <path>', 'Input directory', 'docs')
-  .option('-o, --out <path>', 'Output directory', 'www')
-  .parse()
-
-const options = program.opts()
+initializeCliOptions()
+initializeConfig()
 
 function customHeadingId(url: string) {
   return {
@@ -48,10 +46,10 @@ function createFiles(pageMap: PageMap, globalPageMap: PageMap) {
       }),
       sidebar: generateSidebar(page.headings, page.url),
       main: page.contents,
-      base: isDev ? path.resolve(__dirname, options.out) : '/',
+      base: isDev ? path.resolve(__dirname, getCliOptions().out) : '/',
     })
 
-    const filePath = path.join(__dirname, options.out, page.url)
+    const filePath = path.join(__dirname, getCliOptions().out, page.url)
 
     if (!fs.existsSync(path.dirname(filePath))) {
       fs.mkdirSync(path.dirname(filePath), { recursive: true })
@@ -112,7 +110,7 @@ const pageMap: PageMap = {}
 
 async function parse(docs: string[]) {
   for (const doc of docs) {
-    const filePath = path.join(__dirname, options.in, doc)
+    const filePath = path.join(__dirname, getCliOptions().in, doc)
 
     // check if is directory
     if (fs.lstatSync(filePath).isDirectory()) {
@@ -132,15 +130,14 @@ async function parse(docs: string[]) {
 
     if (!contents) continue
 
-    const headings: string[] = []
+    const headings: Heading[] = []
     const url = doc.replace('.md', '.html')
 
     marked.use(customHeadingId(url))
     const html = await marked.parse(contents, {
       walkTokens: (token) => {
         if (token.type === 'heading') {
-          headings.push(token.text)
-          token.text = 'hello'
+          headings.push({ text: token.text, level: token.depth })
         }
       },
     })
@@ -157,7 +154,7 @@ async function parse(docs: string[]) {
 }
 
 // recursively copy files from assets to output directory
-function copyAssets(dir: string, isUserAsset = false) {
+function copyAssets(dir: string) {
   const files = fs.readdirSync(dir)
 
   for (const file of files) {
@@ -177,9 +174,7 @@ function copyAssets(dir: string, isUserAsset = false) {
     // get the path after the assets directory
     const assetPath = filePath.slice(index)
 
-    const dest = path.join(__dirname, options.out, assetPath)
-
-    console.log(filePath, dest, options.in)
+    const dest = path.join(__dirname, getCliOptions().out, assetPath)
 
     if (!fs.existsSync(path.dirname(dest))) {
       fs.mkdirSync(path.dirname(dest), { recursive: true })
@@ -190,8 +185,10 @@ function copyAssets(dir: string, isUserAsset = false) {
 }
 
 copyAssets(path.join(__dirname, 'assets'))
-copyAssets(path.join(__dirname, options.in, 'assets'), true)
+copyAssets(path.join(__dirname, getCliOptions().in, 'assets'))
 
-const docs = fs.readdirSync(path.join(__dirname, options.in))
+const docs = fs.readdirSync(path.join(__dirname, getCliOptions().in))
 
 parse(docs)
+
+generateCssVariables()

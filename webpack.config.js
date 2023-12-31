@@ -39,6 +39,10 @@ module.exports = (env, argv) => {
             sources: false,
           },
         },
+        {
+          test: /\.css$/i,
+          use: ['css-loader'],
+        },
       ],
     },
     resolve: {

@@ -1,0 +1,24 @@
+:root {
+  --color-primary-10: <TEMPLATE_SLOT name="color-primary-10" />;
+  --color-primary-20: <TEMPLATE_SLOT name="color-primary-20" />;
+  --color-primary-30: <TEMPLATE_SLOT name="color-primary-30" />;
+  --color-primary-40: <TEMPLATE_SLOT name="color-primary-40" />;
+  --color-primary-50: <TEMPLATE_SLOT name="color-primary-50" />;
+
+  --color-secondary-10: <TEMPLATE_SLOT name="color-secondary-10" />;
+  --color-secondary-20: <TEMPLATE_SLOT name="color-secondary-20" />;
+  --color-secondary-30: <TEMPLATE_SLOT name="color-secondary-30" />;
+  --color-secondary-40: <TEMPLATE_SLOT name="color-secondary-40" />;
+  --color-secondary-50: <TEMPLATE_SLOT name="color-secondary-50" />;
+
+  --color-gray-5: <TEMPLATE_SLOT name="color-gray-5" />;
+  --color-gray-10: <TEMPLATE_SLOT name="color-gray-10" />;
+  --color-gray-20: <TEMPLATE_SLOT name="color-gray-20" />;
+  --color-gray-30: <TEMPLATE_SLOT name="color-gray-30" />;
+  --color-gray-40: <TEMPLATE_SLOT name="color-gray-40" />;
+  --color-gray-50: <TEMPLATE_SLOT name="color-gray-50" />;
+  --color-gray-60: <TEMPLATE_SLOT name="color-gray-60" />;
+  --color-gray-70: <TEMPLATE_SLOT name="color-gray-70" />;
+  --color-gray-80: <TEMPLATE_SLOT name="color-gray-80" />;
+  --color-gray-90: <TEMPLATE_SLOT name="color-gray-90" />;
+}

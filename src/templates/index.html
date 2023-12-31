@@ -8,10 +8,12 @@
   </head>
   <body>
     <script src="assets/javascript/accordion.js"></script>
+    <script src="assets/javascript/sidebar.js"></script>
     <TEMPLATE_SLOT name="navigation" />
     <main class="main">
       <div class="page-content"><TEMPLATE_SLOT name="main" /></div>
+      <TEMPLATE_SLOT name="sidebar" />
     </main>
-    <TEMPLATE_SLOT name="sidebar" />
+    
   </body>
 </html>

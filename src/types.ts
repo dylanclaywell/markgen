@@ -1,12 +1,17 @@
 export type ValueOf<T> = T[keyof T]
 
+export type Heading = {
+  level: number
+  text: string
+}
+
 export type PageMap = {
   [key: string]:
     | {
         title: string
         url: string
         contents: string
-        headings: string[]
+        headings: Heading[]
       }
     | PageMap
 }
