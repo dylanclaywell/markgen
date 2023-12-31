@@ -11,8 +11,6 @@ import { generateCssVariables } from './cssVariables'
 import { getCliOptions, initializeCliOptions } from './cli'
 import { initializeConfig } from './config'
 
-const isDev = process.env.NODE_ENV === 'development'
-
 initializeCliOptions()
 initializeConfig()
 
@@ -38,6 +36,16 @@ function createFiles(pageMap: PageMap, globalPageMap: PageMap) {
       return createFiles(page, globalPageMap)
     }
 
+    // Get the relative path to the base directory, where the output directory is the root
+    const relativeBaseUrl = path.relative(
+      path.join(
+        process.cwd(),
+        getCliOptions().output,
+        page.url.replace(path.basename(page.url), ''),
+      ),
+      path.join(process.cwd(), getCliOptions().output),
+    )
+
     const html = replaceTemplateSlots(indexTemplate, {
       title: page.title,
       navigation: generateNavigation({
@@ -46,10 +54,10 @@ function createFiles(pageMap: PageMap, globalPageMap: PageMap) {
       }),
       sidebar: generateSidebar(page.headings, page.url),
       main: page.contents,
-      base: isDev ? path.resolve(__dirname, getCliOptions().out) : '/',
+      base: relativeBaseUrl,
     })
 
-    const filePath = path.join(__dirname, getCliOptions().out, page.url)
+    const filePath = path.join(process.cwd(), getCliOptions().output, page.url)
 
     if (!fs.existsSync(path.dirname(filePath))) {
       fs.mkdirSync(path.dirname(filePath), { recursive: true })
@@ -110,7 +118,7 @@ const pageMap: PageMap = {}
 
 async function parse(docs: string[]) {
   for (const doc of docs) {
-    const filePath = path.join(__dirname, getCliOptions().in, doc)
+    const filePath = path.join(process.cwd(), getCliOptions().input, doc)
 
     // check if is directory
     if (fs.lstatSync(filePath).isDirectory()) {
@@ -143,10 +151,11 @@ async function parse(docs: string[]) {
     })
 
     set(pageMap, doc, {
-      title: frontMatter.title as string,
+      title: (frontMatter.title as string) ?? doc.replace('.md', ''),
       url,
       contents: html,
       headings,
+      link: true,
     })
   }
 
@@ -155,39 +164,41 @@ async function parse(docs: string[]) {
 
 // recursively copy files from assets to output directory
 function copyAssets(dir: string) {
-  const files = fs.readdirSync(dir)
+  try {
+    const files = fs.readdirSync(dir)
 
-  for (const file of files) {
-    if (file === '.DS_Store') continue
+    for (const file of files) {
+      if (file === '.DS_Store') continue
 
-    const filePath = path.join(dir, file)
-    const stats = fs.statSync(filePath)
+      const filePath = path.join(dir, file)
+      const stats = fs.statSync(filePath)
 
-    if (stats.isDirectory()) {
-      copyAssets(filePath)
-      continue
+      if (stats.isDirectory()) {
+        copyAssets(filePath)
+        continue
+      }
+
+      // get index of the last directory called assets
+      const index = filePath.lastIndexOf('assets')
+
+      // get the path after the assets directory
+      const assetPath = filePath.slice(index)
+
+      const dest = path.join(process.cwd(), getCliOptions().output, assetPath)
+
+      if (!fs.existsSync(path.dirname(dest))) {
+        fs.mkdirSync(path.dirname(dest), { recursive: true })
+      }
+
+      fs.copyFileSync(filePath, dest)
     }
-
-    // get index of the last directory called assets
-    const index = filePath.lastIndexOf('assets')
-
-    // get the path after the assets directory
-    const assetPath = filePath.slice(index)
-
-    const dest = path.join(__dirname, getCliOptions().out, assetPath)
-
-    if (!fs.existsSync(path.dirname(dest))) {
-      fs.mkdirSync(path.dirname(dest), { recursive: true })
-    }
-
-    fs.copyFileSync(filePath, dest)
-  }
+  } catch (error) {}
 }
 
 copyAssets(path.join(__dirname, 'assets'))
-copyAssets(path.join(__dirname, getCliOptions().in, 'assets'))
+copyAssets(path.join(process.cwd(), getCliOptions().input, 'assets'))
 
-const docs = fs.readdirSync(path.join(__dirname, getCliOptions().in))
+const docs = fs.readdirSync(path.join(process.cwd(), getCliOptions().input))
 
 parse(docs)
 

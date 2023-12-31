@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
     copyPluginPatterns.push(
       ...[
         {
-          from: path.resolve(__dirname, 'src', 'docs'),
+          from: path.resolve(__dirname, 'markgen'),
           to: path.resolve(__dirname, 'dist', 'docs'),
         },
       ],

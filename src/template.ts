@@ -1,5 +1,5 @@
 export function replaceTemplateSlot(template: string, value: string) {
-  return template.replace(/<TEMPLATE_SLOT \/>/, value)
+  return template.replace(/<TEMPLATE_SLOT\s?\/>/, value)
 }
 
 export function replaceTemplateSlots(
@@ -10,7 +10,7 @@ export function replaceTemplateSlots(
 
   for (const key in values) {
     result = result.replace(
-      new RegExp(`<TEMPLATE_SLOT name="${key}" />`, 'g'),
+      new RegExp(`<TEMPLATE_SLOT name="${key}"\\s?/>`, 'g'),
       values[key],
     )
   }

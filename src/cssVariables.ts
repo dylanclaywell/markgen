@@ -20,8 +20,8 @@ export function generateCssVariables() {
   const newColorsFile = replaceTemplateSlots(colorStyles.toString(), colorMap)
 
   const filePath = path.join(
-    __dirname,
-    getCliOptions().out,
+    process.cwd(),
+    getCliOptions().output,
     'assets',
     'colors.css',
   )

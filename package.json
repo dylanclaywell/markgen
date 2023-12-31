@@ -5,7 +5,8 @@
   "author": "Dylan Claywell <djclaywell@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --mode development && node dist/markgen.js --in docs --out www",
+    "start": "webpack --mode development && node dist/markgen.js --input docs --output www",
+    "markgen": "yarn build && node dist/markgen.js --input markgen --output docs",
     "dev": "nodemon",
     "build": "webpack --mode production",
     "lint": "eslint . --ext .ts",

@@ -46,15 +46,21 @@ function deepMerge(target: any, source: any) {
 
 let config: z.infer<typeof Config>
 
+function readUserConfig() {
+  try {
+    const file = fs.readFileSync(
+      path.resolve(process.cwd(), getCliOptions().input, 'markgen.json'),
+      'utf-8',
+    )
+
+    return JSON.parse(file)
+  } catch (error) {
+    return {}
+  }
+}
+
 export function initializeConfig() {
-  const userConfig = Config.parse(
-    JSON.parse(
-      fs.readFileSync(
-        path.resolve(__dirname, getCliOptions().in, 'markgen.json'),
-        'utf-8',
-      ),
-    ),
-  )
+  const userConfig = Config.parse(readUserConfig())
 
   config = deepMerge(defaultConfig, userConfig)
 }

@@ -1,0 +1,51 @@
+<!doctype html> <html lang="en"> <head> <meta charset="UTF-8"/> <title>Getting Started</title> <base href=''/> <link rel="stylesheet" href="assets/styles.css"/> </head> <body> <script src="assets/javascript/accordion.js"></script> <script src="assets/javascript/sidebar.js"></script> <nav class="navigation"> <ul> <li> <a class='active' href='index.html'> Getting Started </a> </li>  </ul> </nav>  <main class="main"> <div class="page-content"><h1 id="getting-started-with-markgen-cli"><a href="index.html#getting-started-with-markgen-cli">Getting Started with Markgen CLI</a></h1>
+<p>Welcome to Markgen CLI, a powerful JavaScript tool designed to convert Markdown files into a static site that can be hosted on any platform. Markgen utilizes the <code>marked</code> npm package for seamless Markdown to HTML conversion. Before you begin, ensure you have Node.js version 20 or higher installed on your machine.</p>
+<h2 id="prerequisites"><a href="index.html#prerequisites">Prerequisites</a></h2>
+<p>Before you get started, make sure you have the following prerequisites installed:</p>
+<ul>
+<li><strong>Node.js:</strong> Markgen CLI requires Node.js version 20 or higher. You can download and install it from <a href="https://nodejs.org/">the official Node.js website</a>.</li>
+</ul>
+<h2 id="installation"><a href="index.html#installation">Installation</a></h2>
+<p>As Markgen is not installable as a package, you can download the latest release from the <a href="https://github.com/dylanclaywell/markgen/releases">Markgen GitHub Releases page</a>. Once downloaded, extract the contents and follow the usage instructions below.</p>
+<h2 id="usage"><a href="index.html#usage">Usage</a></h2>
+<p>To convert Markdown files to a static site using Markgen CLI, follow these steps:</p>
+<ol>
+<li><p>Open your terminal.</p>
+</li>
+<li><p>Navigate to the directory where you extracted the Markgen files.</p>
+</li>
+<li><p>Run the following command:</p>
+<pre><code class="language-bash">node markgen.js --input ./path/to/markdown/files --output ./path/to/output
+</code></pre>
+<ul>
+<li><code>--input</code>: Specify the directory containing your Markdown files.</li>
+<li><code>--output</code>: Specify the directory where you want the static site to be generated.</li>
+</ul>
+</li>
+</ol>
+<p>For more options and advanced usage, check out the <a href="https://github.com/dylanclaywell/markgen">CLI documentation</a>.</p>
+<h2 id="example"><a href="index.html#example">Example</a></h2>
+<p>Assuming you have a directory structure like this:</p>
+<pre><code class="language-plaintext">project-root/
+|-- markdown-files/
+|   |-- file1.md
+|   |-- file2.md
+|-- output/
+</code></pre>
+<p>Navigate to the Markgen directory and run:</p>
+<pre><code class="language-bash">node markgen.js --input ./markdown-files --output ./output
+</code></pre>
+<p>This will convert the Markdown files in the <code>markdown-files</code> directory and generate the static site in the <code>output</code> directory.</p>
+<h2 id="additional-information"><a href="index.html#additional-information">Additional Information</a></h2>
+<ul>
+<li>GitHub Repository: <a href="https://github.com/dylanclaywell/markgen">markgen</a></li>
+<li>Releases: <a href="https://github.com/dylanclaywell/markgen/releases">Markgen Releases</a></li>
+<li>Issues and Bugs: <a href="https://github.com/dylanclaywell/markgen/issues">GitHub Issues</a></li>
+</ul>
+<p>Feel free to create issues if you have any questions or need assistance. Happy coding!</p>
+</div> <nav class="sidebar"> On this page <ul> <li class="indent-1"><a data-hash="#getting-started-with-markgen-cli" href="index.html#getting-started-with-markgen-cli">Getting Started with Markgen CLI</a></li>
+<li class="indent-2"><a data-hash="#prerequisites" href="index.html#prerequisites">Prerequisites</a></li>
+<li class="indent-2"><a data-hash="#installation" href="index.html#installation">Installation</a></li>
+<li class="indent-2"><a data-hash="#usage" href="index.html#usage">Usage</a></li>
+<li class="indent-2"><a data-hash="#example" href="index.html#example">Example</a></li>
+<li class="indent-2"><a data-hash="#additional-information" href="index.html#additional-information">Additional Information</a></li> </ul> </nav>  </main> </body> </html> 

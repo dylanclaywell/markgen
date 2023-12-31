@@ -8,6 +8,7 @@ export type Heading = {
 export type PageMap = {
   [key: string]:
     | {
+        link: boolean
         title: string
         url: string
         contents: string
@@ -17,7 +18,5 @@ export type PageMap = {
 }
 
 export function isPageMap(pageMap: unknown): pageMap is PageMap {
-  return (
-    typeof pageMap === 'object' && pageMap !== null && !('title' in pageMap)
-  )
+  return typeof pageMap === 'object' && pageMap !== null && !('link' in pageMap)
 }

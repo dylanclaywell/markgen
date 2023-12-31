@@ -1,0 +1,1 @@
+window.addEventListener("hashchange",(()=>{document.querySelectorAll(".sidebar a").forEach((e=>{if(e.getAttribute("data-hash")===window.location.hash)return e.classList.add("active"),void e.parentElement.classList.add("active");e.parentElement.classList.remove("active"),e.classList.remove("active")}))}));

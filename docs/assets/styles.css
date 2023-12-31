@@ -1,0 +1,281 @@
+@import 'colors.css';
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('fonts/Roboto_Serif/RobotoSerif-VariableFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('fonts/Roboto_Serif/RobotoSerif-VariableFont.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('fonts/Roboto_Serif/RobotoSerif-Italic-VariableFont.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('fonts/Roboto_Serif/RobotoSerif-Italic-VariableFont.ttf')
+    format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+pre {
+  display: grid;
+}
+
+code {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+body {
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  font-family: 'Roboto Serif', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 3rem;
+  font-family: 'Roboto Mono', monospace;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  text-decoration: none;
+  color: var(--color-gray-50);
+  font-weight: normal;
+  transition: 150ms all;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: var(--color-primary-30);
+}
+
+img {
+  max-width: 100%;
+  margin: 2rem 0;
+  filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+}
+
+p,
+li {
+  line-height: 2rem;
+}
+
+.navigation {
+  padding: 0.5rem;
+  flex-basis: 20%;
+  flex-grow: 1;
+  border-right: 1px solid #eee;
+  height: calc(100vh - 1rem);
+  overflow-y: auto;
+}
+
+.navigation > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navigation li {
+  cursor: pointer;
+  display: flex;
+  padding: 0.75rem 0;
+}
+
+.navigation li a {
+  width: 100%;
+  padding-left: 0.75rem;
+  text-decoration: none;
+  color: var(--color-gray-40);
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.navigation li a.active {
+  border-left: 0.25rem solid var(--color-primary-30);
+  color: var(--color-primary-30);
+}
+
+.navigation li a:hover {
+  color: var(--color-gray-90);
+}
+
+.navigation li a.active:hover {
+  color: var(--color-primary-40);
+}
+
+.main {
+  flex-basis: 80%;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100vh;
+  color: var(--color-gray-40);
+  display: flex;
+  min-width: 0;
+}
+
+.page-content {
+  padding: 3rem 6rem;
+}
+
+.category-button {
+  all: unset;
+  font-weight: bold;
+  padding: 0.75rem;
+  cursor: pointer;
+  color: var(--color-gray-40);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.category-button:hover {
+  color: var(--color-gray-90);
+}
+
+.category-button svg {
+  pointer-events: none;
+  transition: 150ms all;
+}
+
+.category-button span {
+  pointer-events: none;
+}
+
+.category-button.open svg {
+  transform: rotate(90deg);
+}
+
+.category-list {
+  transition: 300ms all;
+  overflow: hidden;
+  padding-left: 1rem;
+}
+
+.category-list.hidden {
+  height: 0;
+}
+
+.sidebar {
+  width: 50%;
+  padding: 1rem;
+  position: sticky;
+  top: 6rem;
+  height: calc(100vh - 8rem);
+  color: var(--color-gray-30);
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  transition: 150ms all;
+  font-size: 0.75rem;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--color-gray-30);
+}
+
+.sidebar a:hover {
+  color: var(--color-gray-90);
+}
+
+.sidebar li.active::marker {
+  color: var(--color-secondary-30);
+}
+
+.sidebar li.active:hover::marker {
+  color: var(--color-secondary-40);
+}
+
+.sidebar li.indent-2 {
+  margin-left: 1rem;
+}
+
+.sidebar li.indent-3 {
+  margin-left: 2rem;
+}
+
+.sidebar li.indent-4 {
+  margin-left: 3rem;
+}
+
+.sidebar li.indent-5 {
+  margin-left: 4rem;
+}
+
+.sidebar li.indent-6 {
+  margin-left: 5rem;
+}
+
+.sidebar li a.active {
+  color: var(--color-secondary-30);
+}
+
+.sidebar li a.active:hover {
+  color: var(--color-secondary-40);
+}
