@@ -6,6 +6,7 @@
     format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -14,6 +15,7 @@
     format('truetype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -22,6 +24,7 @@
     format('truetype');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -30,6 +33,7 @@
     format('truetype');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -37,6 +41,7 @@
   src: url('fonts/Roboto_Serif/RobotoSerif-VariableFont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -44,6 +49,7 @@
   src: url('fonts/Roboto_Serif/RobotoSerif-VariableFont.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -52,6 +58,7 @@
     format('truetype');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -60,6 +67,7 @@
     format('truetype');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 pre {
